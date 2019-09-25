@@ -515,8 +515,8 @@ Status ReadBinaryProto(Env* env, const string& fname,
   ::tensorflow::protobuf::io::CodedInputStream coded_stream(stream.get());
   // Total bytes hard limit / warning limit are set to 1GB and 512MB
   // respectively.
-  coded_stream.SetTotalBytesLimit(1024LL << 20, 512LL << 20);
-
+  coded_stream.SetTotalBytesLimit(2147483647, 512LL << 20);
+  
   if (!proto->ParseFromCodedStream(&coded_stream) ||
       !coded_stream.ConsumedEntireMessage()) {
     TF_RETURN_IF_ERROR(stream->status());
